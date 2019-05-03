@@ -1,0 +1,312 @@
+
+<!DOCTYPE HTML>  
+<html>
+<head>
+</head>
+<body>  
+
+<?php
+// define variables and set to empty values
+$name = $email = $gender = $comment = $website = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
+  $website = test_input($_POST["website"]);
+  $comment = test_input($_POST["comment"]);
+  $gender = test_input($_POST["gender"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+<h2>PHP Form Validation Example</h2>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+  Name: <input type="text" name="name">
+  <br><br>
+  E-mail: <input type="text" name="email">
+  <br><br>
+  Website: <input type="text" name="website">
+  <br><br>
+  Comment: <textarea name="comment" rows="5" cols="40"></textarea>
+  <br><br>
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <input type="radio" name="gender" value="other">Other
+  <br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+<?php
+echo "<h2>Your Input:</h2>";
+echo $name;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $website;
+echo "<br>";
+echo $comment;
+echo "<br>";
+echo $gender;
+?>
+
+</body>
+</html>
+
+********************************************************
+<?php
+	         $addq='<script> 
+			var ab = document.getElementById("category").value;
+			document.writeln(ab);
+			</script>';
+			echo "hello";
+			
+	        $query4 = "SELECT * FROM doctor where d_category='"+$addq+"'";
+	        $result4 = mysqli_query($connect, $query4) or die(mysql_error());
+			$row4 = mysqli_fetch_array($result4);
+			
+			
+	?>
+	
+	document.getElementById("doctor").innerHTML = '
+	<option value="<?php echo $row4["d_name"];?>"><?php echo $row4["d_name"];?></option>
+	
+	 ***********************************************************************
+	
+     <br>
+	 
+		<label for="category">Category:</label>
+    
+	<select id="category" name="category" onchange="selectdoc(this.value)">
+	<option value="" >Select Category First</option>
+	
+	<?php while($row2 = mysqli_fetch_array($result2)):;?>
+	<option value="<?php echo $row2["d_category"];?>"><?php echo $row2["d_category"];?></option>
+
+            <?php endwhile;?>
+
+    </select>
+
+	
+	  *****************************
+
+<script>
+
+	function selectdoc(str){
+		if (str == "") {
+        document.getElementById("showdoc").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("showdoc").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getdoc.php?q="+str,true);
+        xmlhttp.send();
+    }
+	    
+	
+	}
+	
+</script>
+
+**************************************************
+
+<?php
+$q = $_GET["q"];
+
+     $hostname="localhost";
+	 $username="root";
+	 $password="";
+	 $dbname="cmpt";
+	 $connect = mysqli_connect($hostname, $username, $password, $dbname);
+	 
+	 mysqli_select_db($connect,"ajax_demo");
+	 
+	 /* $sql="SELECT * FROM user WHERE id = '".$q."'";
+     $result = mysqli_query($con,$sql);*/
+	 
+	        $query3 = "SELECT * FROM doctor where d_category= '".$q."'";			
+	        $result3 = mysqli_query($connect, $query3) or die(mysql_error());
+			?>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+
+			
+			<script>
+
+	function selecttime(){
+		var str = document.getElementById("doctor").value;
+		document.write(5+6);
+		if (str == "") {
+        document.getElementById("showtime").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp1 = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp1 = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp1.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("showtime").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp1.open("POST","gettime.php?p="+str,true);
+        xmlhttp1.send();
+    }
+	    
+	
+	}
+	
+</script>
+			<form>
+			
+			<label for="doctor">Doctors:</label>
+    <select id="doctor" name="doctor" onchange  = "selecttime()">
+	<option value="" >Select Doctor Please</option>
+			
+			
+	<?php while($row3 = mysqli_fetch_array($result3)):;?>
+	<option value="<?php echo $row3["d_name"];?>"><?php echo $row3["d_name"];?></option>
+
+            <?php endwhile;?>`
+			</select>
+			</form>
+			
+			
+			
+		<br><br>
+		<p id="showtime">uulala</p>
+		
+		
+		
+    
+</body>  
+</html>
+
+*******************************************************************************************
+
+ 
+	 Select your date please:
+   <br>
+	Date:
+	<input type='date' id='date' name='date' value='<?php echo date('Y-m-d');?>'>
+	
+	<br>
+	******************
+	placeholder="14 Days from today"
+
+
+*******************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML>  
+<html>
+<head>
+</head>
+<body>  
+
+<?php
+// define variables and set to empty values
+$name = $email = $gender = $comment = $website = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $p_id = test_input($_POST["p_id"]);
+  $p_name = test_input($_POST["p_name"]);
+  $p_id = test_input($_POST["name"]);
+  $p_id = test_input($_POST["name"]);
+  $p_id = test_input($_POST["name"]);
+  $p_id = test_input($_POST["name"]);
+  $p_id = test_input($_POST["name"]);
+  $p_id = test_input($_POST["name"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+<h2>Registration form</h2>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+  
+  UserId: <input type="text" id = "p_id" name="p_id">
+  <br><br>
+  Password: <input type="text" id = "p_pass" name="p_pass">
+  <br><br>
+  Name: <input type="text" id = "p_name" name="p_name">
+  <br><br>
+  E-mail: <input type="text" id = "p_email" name="p_email">
+  <br><br>
+  Phone: <input type="text" id = "p_phone" name="p_phone">
+  <br><br>
+  Address: <textarea id = "p_address" name="p_address" rows="5" cols="40"></textarea>
+  <br><br>
+  Health Card No: <input type="text" id = "h_card" name="h_card">
+  <br><br>
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <input type="radio" name="gender" value="other">Other
+  <br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+<?php
+echo "<h2>Your Input:</h2>";
+echo $name;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $website;
+echo "<br>";
+echo $comment;
+echo "<br>";
+echo $gender;
+?>
+
+</body>
+</html>
+
+
+
+
+
+
+******************************************************
