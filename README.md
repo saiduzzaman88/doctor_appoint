@@ -4,6 +4,7 @@ web app
 * 1.Xampp 
 * 2.PHP
 * 3.MySQL
+* 4.Apache
 
 # Run the web app:
 * 1.copy and paste all the files in "C:\xampp\htdocs\doc\"
