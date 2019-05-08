@@ -1,7 +1,7 @@
 # doctor_appoint
 web app
 # Prerequisites:
-* 1.Xampp 
+* 1.Xampp (make sure xampp is always running along Apache to get access to the database)
 * 2.PHP
 * 3.MySQL
 * 4.Apache
